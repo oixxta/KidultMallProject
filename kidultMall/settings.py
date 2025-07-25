@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-%$(@l4%_-u6s6kb7^r+me^9t1o3&j(wngjihp6$%_rjr($&*7u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'kidultmallproject.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
