@@ -3,3 +3,4 @@ asgiref==3.9.1
 sqlparse==0.5.3
 pillow==11.3.0
 tzdata==2025.2
+gunicorn
