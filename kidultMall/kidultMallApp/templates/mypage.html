@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  {% include '00_Template_Head.html' %}
+</head>
+<body>
+{% include '00_Template_Top.html' %}
+<hr>
+<div class="container mt-5">
+  <h2 class="mb-4">👤 마이페이지</h2>
+  <div class="card">
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>아이디:</strong> {{ user.userId }}</li>
+        <li class="list-group-item"><strong>이름:</strong> {{ user.name }}</li>
+        <li class="list-group-item"><strong>닉네임:</strong> {{ user.nickname }}</li>
+        <li class="list-group-item"><strong>성별:</strong> {{ user.gender }}</li>
+        <li class="list-group-item"><strong>이메일:</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>전화번호:</strong> {{ user.phoneNumber }}</li>
+        <li class="list-group-item"><strong>주소:</strong> {{ user.address }}</li>
+        <li class="list-group-item"><strong>회원번호:</strong> {{ user.no }}</li>
+        <li class="list-group-item"><strong>가입일:</strong> {{ user.joinDate|date:"Y-m-d" }}</li>
+        <li class="list-group-item"><strong>포인트:</strong> {{ user.point }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-4 text-right">
+    <a href="{% url 'basketView' %}" class="btn btn-outline-secondary mr-2">🛒 장바구니</a>
+    <a href="{% url 'mypageEdit' %}" class="btn btn-info mr-2">✏️ 정보 수정</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger mr-2">🚪 로그아웃</a>
+    <a href="{% url 'mypageWithdraw' %}" class="btn btn-outline-danger">탈퇴</a>
+  </div>
+</div>
+<hr>
+{% include '00_Template_Bottom.html' %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+<div id="header">
+    <div id="top" style="display: flex; justify-content: flex-end;">
+      {% if request.session.userId %}
+        <span class="text-white mr-2">{{ request.session.userNickname }} 어른이, 환영합니다!</span>
+        <a href="{% url 'logout' %}" class="btn btn-dark btn-sm">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-dark btn-sm">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-dark btn-sm ml-1">Join</a>
+      {% endif %}
+    </div>
+    <div id="logoArea" style="display: flex; justify-content: center; align-items: center;">
+      <a href="{% url 'mainPage' %}">
+        <img src="/media/KidultMallLogo.jpg" width="570" height="68">
+      </a>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'new' %}">신규입고</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'men' %}">남자어른이</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'women' %}">여자어른이</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'boardList' %}">제품문의</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'basketView' %}">장바구니</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'mypageView' %}">마이페이지</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+{% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+{% endif %}

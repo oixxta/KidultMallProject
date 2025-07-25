@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include '00_Template_Head.html' %} 
+</head>
+<body>
+{% include '00_Template_Top.html' %} 
+<!----------------------------------- 이하 메인 페이지 내용 ---------------------------------->
+<hr>
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">{{ user.nickname }} 어른이의 장바구니</h2>
+  <div class="row">
+
+    {% if user.cart.cartitem_set.all %}
+      {% for item in user.cart.cartitem_set.all %}
+      <div class="col-md-4 product-card">
+        <div class="card h-100">
+          {% if item.productInCart.image %}
+          <img src="{{ item.productInCart.image.url }}" class="card-img-top product-image" alt="{{ item.productInCart.productName }}">
+          {% else %}
+          <img src="/media/products/placeHolder.jpg" class="card-img-top product-image" alt="기본 이미지">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{ item.productInCart.productName }}</h5>
+            <p class="card-text">
+              수량: {{ item.quantity }}개<br>
+              개당 단가: {{ item.productInCart.price }}원<br>
+              담은 시간: {{ item.added_at|date:"Y-m-d H:i" }}
+            </p>
+          </div>
+
+          <div class="card-footer text-center">
+            <form method="POST" action="{% url 'deleteFromCart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="productId" value="{{ item.productInCart.id }}">
+              <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="col-12">
+        <div class="alert alert-warning text-center">장바구니에 담긴 상품이 없습니다.</div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<hr>
+<!----------------------------------- 이상 메인 페이지 내용 ---------------------------------->
+{% include '00_Template_Bottom.html' %} 
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% include '00_Template_Head.html' %}
+</head>
+<body>
+{% include '00_Template_Top.html' %}
+<hr>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>제품문의 게시판</h4>
+    <a href="{% url 'boardWrite' %}" class="btn btn-primary">글쓰기</a>
+  </div>
+
+  {% if boards %}
+    <ul class="list-group">
+      {% for board in boards %}
+        <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+          <div>
+            <a href="{% url 'boardDetail' board.no %}" class="font-weight-bold">{{ board.title }}</a><br>
+            <small class="text-muted">
+              작성자: {{ board.author }} | 글번호: {{ board.no }} | 작성일: {{ board.created_at|date:"Y-m-d H:i" }} |
+               조회수: {{ board.showCount }}
+            </small>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info text-center mt-4">게시글이 없습니다.</div>
+  {% endif %}
+</div>
+<hr>
+{% include '00_Template_Bottom.html' %}
+</body>
+</html>

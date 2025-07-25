@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include '00_Template_Head.html' %} 
+</head>
+<body>
+{% include '00_Template_Top.html' %} 
+<!----------------------------------- 이하 메인 페이지 내용 ---------------------------------->
+<hr>
+<div class="container mt-5 mb-5">
+<h2 class="mb-4">게시글 수정</h2>
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{ board.title }}" required>
+    </div>
+    {% if request.session.userNickname %}
+    <div class="form-group">
+        <label for="author">작성자</label>
+        <input type="text" class="form-control" id="author" name="author" value="{{ request.session.userNickname }}" readonly>
+    </div>
+    {% else %}
+    <div class="form-group">
+        <label for="author">작성자</label>
+        <input type="text" class="form-control" id="author" name="author" value="{{ board.author }}" required>
+    </div>
+    {% endif %}
+    <div class="form-group">
+        <label for="content">내용</label>
+        <textarea class="form-control" id="content" name="content" rows="10" value="{{ board.content }}" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">작성 완료</button>
+    <a href="{% url 'boardList' %}" class="btn btn-secondary ml-2">목록으로</a>
+</form>
+</div>
+<hr>
+<!----------------------------------- 이상 메인 페이지 내용 ---------------------------------->
+{% include '00_Template_Bottom.html' %} 
+</body>
+</html>

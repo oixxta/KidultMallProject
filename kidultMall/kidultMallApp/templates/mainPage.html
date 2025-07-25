@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include '00_Template_Head.html' %} 
+</head>
+<body>
+{% include '00_Template_Top.html' %} 
+<!----------------------------------- 이하 메인 페이지 내용 ---------------------------------->
+<hr>
+  <div id="BannerArea" style="display: flex; justify-content: center; align-items: center;">
+    <a href="{% url 'new' %}">
+      <img src="/media/{{ bannerImage }}" width="600" height="456">
+    </a>
+  </div>
+<hr>
+<!----------------------------------- 이상 메인 페이지 내용 ---------------------------------->
+{% include '00_Template_Bottom.html' %} 
+</body>
+</html>

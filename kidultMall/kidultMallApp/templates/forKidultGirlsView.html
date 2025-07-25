@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include '00_Template_Head.html' %}
+<style>
+      .product-card {
+        margin-bottom: 30px;
+      }
+      .product-image {
+        height: 300px;
+        object-fit: cover;
+      }
+    </style>
+</head>
+<body>
+{% include '00_Template_Top.html' %} 
+<!----------------------------------- 이하 메인 페이지 내용 ---------------------------------->
+<hr>
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">여자어른이를 위한 상품!</h2>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4 product-card">
+      <div class="card h-100">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.productName }}">
+        {% else %}
+        <img src="/media/products/placeHolder.jpg" class="card-img-top product-image" alt="기본 이미지">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text">
+            가격: {{ product.price }}원<br>
+            남은 수량: {{ product.quantity }}<br>
+            상품 ID: {{ product.id }}<br>
+            출시일: {{ product.created_at }}
+          </p>
+        </div>
+        <div class="card-footer text-center">
+          <form method="POST" action="{% url 'addToCart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="productId" value="{{ product.id }}">
+            <button type="submit" class="btn btn-primary">장바구니 넣기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert alert-warning text-center">상품이 없습니다. 죄송합니다 ㅠㅠ</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<hr>
+<!----------------------------------- 이상 메인 페이지 내용 ---------------------------------->
+{% include '00_Template_Bottom.html' %} 
+</body>
+</html>

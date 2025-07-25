@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include '00_Template_Head.html' %} 
+</head>
+<body>
+{% include '00_Template_Top.html' %} 
+<!----------------------------------- 이하 메인 페이지 내용 ---------------------------------->
+<hr>
+<div class="container mt-5 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title mb-3">{{ board.title }}</h4>
+      
+      <div class="mb-2 text-muted">
+        <strong>작성자:</strong> {{ board.author }} &nbsp; | &nbsp;
+        <strong>작성일:</strong> {{ board.created_at }} &nbsp; | &nbsp;
+        <strong>조회수:</strong> {{ board.showCount }}
+      </div>
+
+      <hr>
+
+      <div class="mt-4">
+        <p class="card-text" style="white-space: pre-wrap;">{{ board.content }}</p>
+      </div>
+
+      <hr>
+      <div class="mt-4">
+        <a href="{% url 'boardList' %}" class="btn btn-secondary">목록으로</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<!----------------------------------- 이상 메인 페이지 내용 ---------------------------------->
+{% include '00_Template_Bottom.html' %} 
+</body>
+</html>
